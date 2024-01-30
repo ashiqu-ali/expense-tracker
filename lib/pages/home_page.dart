@@ -1,5 +1,6 @@
 import 'package:expense_tracker/componets/heading.dart';
 import 'package:expense_tracker/componets/homeProfile.dart';
+import 'package:expense_tracker/componets/recent_transaction.dart';
 import 'package:expense_tracker/componets/total_card.dart';
 import 'package:expense_tracker/componets/transaction_tile.dart';
 import 'package:flutter/cupertino.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 const HomeProfile(),
                 TotalBalance(totalBalance: totalBalance, totalIncome: totalIncome, totalExpense: totalExpense),
                 const Heading(headng: "Recent Transaction"),
-                Transaction(length: snapshot.data!.length, data: snapshot.data!),
+                RecentTransaction(data: snapshot.data!),
               ],
             );
           } else {
