@@ -4,9 +4,7 @@ import 'package:expense_tracker/componets/total_card.dart';
 import 'package:expense_tracker/componets/transaction_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../controller/db_helper.dart';
-import '../utils/style.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   int totalIncome = 0;
   int totalExpense = 0;
 
-  void getTotalBalance(List<Map<dynamic, dynamic>> entireData) {
+  getTotalBalance(List<Map<dynamic, dynamic>> entireData) {
     totalBalance = 0;
     totalIncome = 0;
     totalExpense = 0;

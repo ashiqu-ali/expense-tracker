@@ -3,52 +3,41 @@ import 'package:flutter/cupertino.dart';
 import 'cardExpense.dart';
 import 'cardIncome.dart';
 
-class Transaction extends StatelessWidget {
-  final int length;
-  final Map data;
+class RecentTransaction extends StatelessWidget {
+  final List<Map<dynamic, dynamic>> data;
 
-  Transaction({
-    required this.length,
+  const RecentTransaction({
     required this.data,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Check if there are any transactions
-    if (length == 0) {
-      // Display center text if no recent transactions
-      return Center(
-        child: Text("No recent transactions"),
-      );
-    }
-
-    // Calculate the number of items to be displayed (maximum 5)
-    int itemCount = length > 5 ? 5 : length;
+    int length = data.length < 5 ? data.length : 5;
 
     return SizedBox(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: itemCount,
+        itemCount: length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          // Calculate the actual index based on the length and itemCount
-          int actualIndex = length - itemCount + index;
-          Map dataAtIndex = data![actualIndex];
+          Map<dynamic, dynamic> dataAtIndex = data[index];
           if (dataAtIndex['type'] == 'Income') {
             return CardIncome(
-                type: dataAtIndex['type'],
-                amount: dataAtIndex['amount'].toString(),
-                note: dataAtIndex['note'],
-                date: dataAtIndex['date'],
-                category: dataAtIndex['category']);
+              type: dataAtIndex['type'],
+              amount: dataAtIndex['amount'].toString(),
+              note: dataAtIndex['note'],
+              date: dataAtIndex['date'],
+              category: dataAtIndex['category'],
+            );
           } else {
             return CardExpense(
-                type: dataAtIndex['type'],
-                amount: dataAtIndex['amount'].toString(),
-                note: dataAtIndex['note'],
-                date: dataAtIndex['date'],
-                category: dataAtIndex['category']);
+              type: dataAtIndex['type'],
+              amount: dataAtIndex['amount'].toString(),
+              note: dataAtIndex['note'],
+              date: dataAtIndex['date'],
+              category: dataAtIndex['category'],
+            );
           }
         },
       ),
