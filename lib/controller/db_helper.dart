@@ -43,6 +43,21 @@ class DbHelper {
     }
   }
 
+  Future<void> updateData(int key, int amount, DateTime date, String note, String category, String type) async {
+    var updatedValue = {
+      'amount': amount,
+      'date': date,
+      'category': category,
+      'note': note,
+      'type': type
+    };
+    await box.put(key, updatedValue);
+  }
+
+  Future<void> deleteData(int key)async {
+    await box.delete(key);
+  }
+
   Future<void> deleteAllData() async {
     await box.clear();
   }

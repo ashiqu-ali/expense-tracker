@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -53,8 +54,8 @@ class CardIncome extends StatelessWidget {
                   Text('${date.day}-${months[date.month-1]}',style: p1),
                   Column(
                     children: [
-                      Text(note,style: p2),
-                      Text(category,style: p3),
+                      Text(category,style: p2),
+                      Text(note,style: p3),
                     ],
                   ),
                   Text(amount,style: GoogleFonts.poppins(color: Colors.blue, fontSize: 18,fontWeight: FontWeight.w500)

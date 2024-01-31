@@ -4,19 +4,23 @@ import 'package:expense_tracker/controller/db_helper.dart';
 import 'package:expense_tracker/pages/main_page.dart';
 import 'package:expense_tracker/utils/style.dart';
 
-class AddTransaction extends StatefulWidget {
-  const AddTransaction({Key? key}) : super(key: key);
+class EditTransaction extends StatefulWidget {
+  final Map<String, dynamic> editData;
+  final int index;
+
+  const EditTransaction({Key? key, required this.editData, required this.index}) : super(key: key);
 
   @override
-  State<AddTransaction> createState() => _AddTransactionState();
+  State<EditTransaction> createState() => _EditTransactionState();
 }
 
-class _AddTransactionState extends State<AddTransaction> {
+class _EditTransactionState extends State<EditTransaction> {
   int? amount;
   String note = " ";
   String? type;
   String? category;
-  DateTime date = DateTime.now();
+  DateTime? date;
+  DbHelper dbHelper = DbHelper();
   List<String> months = [
     'Jan',
     'Feb',
@@ -49,8 +53,13 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   void initState() {
     super.initState();
-    type = 'Income';
-    category = (type == 'Income') ? 'Salary' : 'Fashion';
+    type = widget.editData['type'];
+    category = widget.editData['category'];
+    amount = widget.editData['amount'];
+    note = widget.editData['note'];
+    category = widget.editData['category'];
+    date = widget.editData['date'];
+    print(widget.editData);
   }
 
   @override
@@ -64,7 +73,7 @@ class _AddTransactionState extends State<AddTransaction> {
             children: [
               SizedBox(height: medium),
               Text(
-                'Add Transaction',
+                'Edit Transaction',
                 style: heading1,
                 textAlign: TextAlign.center,
               ),
@@ -121,12 +130,12 @@ class _AddTransactionState extends State<AddTransaction> {
                       }
                     },
                     items: (type == 'Income'
-                            ? ['Salary', 'Bonus', 'Other Income']
-                            : ['Fashion', 'Fuel', 'Food', 'Health'])
+                        ? ['Salary', 'Bonus', 'Other Income']
+                        : ['Fashion', 'Fuel', 'Food', 'Health'])
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value,style: p2),
+                        child: Text(value, style: p2),
                       );
                     }).toList(),
                     style: const TextStyle(fontSize: 16),
@@ -149,7 +158,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   prefixIcon: const Icon(Icons.currency_rupee, color: icon),
                   fillColor: white,
                   filled: true,
-                  hintText: '0',
+                  hintText: amount != null ? amount.toString() : '',
                   hintStyle: p1,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -158,6 +167,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 ),
                 onChanged: (val) {
                   try {
+                    // If val is null or empty, set amount to null
                     amount = int.parse(val);
                   } catch (e) {
                     print(e);
@@ -176,7 +186,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   prefixIcon: const Icon(Icons.description_outlined, color: icon),
                   fillColor: white,
                   filled: true,
-                  hintText: 'Notes',
+                  hintText: note,
                   hintStyle: p1,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -204,7 +214,7 @@ class _AddTransactionState extends State<AddTransaction> {
                         const Icon(Icons.date_range, color: icon),
                         SizedBox(width: xsmall),
                         Text(
-                          '${date.day}-${months[date.month - 1]}-${date.year}',
+                          '${date?.day}-${months[date!.month - 1]}-${date?.year}',
                           style: p2,
                         ),
                       ],
@@ -213,23 +223,52 @@ class _AddTransactionState extends State<AddTransaction> {
                 ],
               ),
               SizedBox(height: medium),
-              ElevatedButton(
-                onPressed: () async {
-                  if (amount != null &&
-                      note.isNotEmpty &&
-                      type != null &&
-                      category != null) {
-                    DbHelper dbHelper = DbHelper();
-                    await dbHelper.addData(
-                        amount!, date, category!, note, type!);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const MainPage()));
-                    print('value added');
-                  } else {
-                    print('value not provided');
-                  }
-                },
-                child: const Text('Add'),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        print(widget.index);
+                        try{
+                          await dbHelper.deleteData(widget.index);
+                          print("Delete Succesfully");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MainPage()));
+                        } catch(e) {
+                          print(e);
+                        }
+                      },
+                      icon: const Icon(Icons.delete_outline_rounded)
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        print(amount);
+                        print(type);
+                        print(category);
+                        print(date);
+                        print(note);
+                        try{
+                            await dbHelper.updateData(
+                                    widget.index,
+                                    amount!,
+                                    date!,
+                                    note,
+                                    category!,
+                                    type!
+                            );
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const MainPage()),
+                            );
+                              print('value updated');
+                        }catch(e){
+                          print(e);
+                        }
+                        },
+                      child: const Text('Update'),
+                    ),
+                  ),
+
+                ],
               ),
             ],
           ),
