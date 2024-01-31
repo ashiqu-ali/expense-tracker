@@ -66,11 +66,13 @@ class _HomePageState extends State<HomePage> {
             if (snapshot.hasData) {
               getTotalBalance(snapshot.data!);
               return ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
                   const HomeProfile(),
                   TotalBalance(totalBalance: totalBalance, totalIncome: totalIncome, totalExpense: totalExpense),
                   const Heading(headng: "Recent Transaction"),
-                  RecentTransaction(data: snapshot.data!)
+                  RecentTransaction(data: snapshot.data!),
+                  SizedBox(height: large)
                 ],
               );
             } else {

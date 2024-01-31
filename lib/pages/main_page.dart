@@ -3,6 +3,8 @@ import 'package:expense_tracker/componets/heading.dart';
 import 'package:expense_tracker/pages/demoPage.dart';
 import 'package:expense_tracker/pages/home_page.dart';
 import 'package:expense_tracker/pages/profile_page.dart';
+import 'package:expense_tracker/pages/summary_page.dart';
+import 'package:expense_tracker/pages/transaction_page.dart';
 import 'package:expense_tracker/utils/style.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +21,8 @@ class _MainPageState extends State<MainPage> {
   Widget buildTabContent(int index){
     switch(index){
       case 0:return const HomePage();
-      case 1:return Container();
-      case 2:return DeleteHive();
+      case 1:return SummaryChart();
+      case 2:return TransactionPage();
       case 3:return const ProfilePage();
       default:return const HomePage();
 
@@ -47,7 +49,7 @@ class _MainPageState extends State<MainPage> {
         items: [
           BottomNavigationBarItem(icon: Image.asset("assets/icons/home.png"), label: 'Home'),
           BottomNavigationBarItem(icon: Image.asset("assets/icons/chart-vertical.png"), label: 'Stat'),
-          BottomNavigationBarItem(icon: Image.asset("assets/icons/wallet.png"), label: 'Wallet'),
+          BottomNavigationBarItem(icon: Image.asset("assets/icons/wallet.png"), label: 'Transaction'),
           BottomNavigationBarItem(icon: Image.asset("assets/icons/user.png"), label: 'Account')
         ],
 

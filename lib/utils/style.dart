@@ -32,6 +32,7 @@ TextStyle heading4 = GoogleFonts.poppins(
     fontWeight: FontWeight.w600,color: heading,fontSize: 14);
 
 //sizes
-var medium = 30.0;
-var small = 16.0;
-var xsmall = 10.0;
+double large =  40.0;
+double medium = 30.0;
+double small = 16.0;
+double xsmall = 10.0;

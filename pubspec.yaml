@@ -39,6 +39,7 @@ dependencies:
   hive: ^2.2.3
   flutter_snake_navigationbar: ^0.6.1
   hive_flutter: ^1.1.0
+  fl_chart: ^0.66.1
 
 dev_dependencies:
   flutter_test:
