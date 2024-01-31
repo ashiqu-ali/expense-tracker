@@ -35,13 +35,15 @@ class _IncomeChartState extends State<IncomeChart> {
             categoryTotals[category] = (categoryTotals[category] ?? 0) + amount;
           }
 
-          double totalIncome = categoryTotals.values.fold(0, (sum, amount) => sum + amount);
+          double totalIncome =
+              categoryTotals.values.fold(0, (sum, amount) => sum + amount);
 
           // Create PieChartData
           PieChartData pieChartData = PieChartData(
             sections: categoryTotals.entries.map((entry) {
               return PieChartSectionData(
-                color: Colors.accents[entry.key.hashCode % Colors.accents.length],
+                color:
+                    Colors.accents[entry.key.hashCode % Colors.accents.length],
                 value: entry.value,
                 title: entry.key,
                 radius: 150,
@@ -55,7 +57,8 @@ class _IncomeChartState extends State<IncomeChart> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: small),
-                  Text('Total Income: \$${totalIncome?.toStringAsFixed(2)}', style: p1),
+                  Text('Total Income: \$${totalIncome?.toStringAsFixed(2)}',
+                      style: p1),
                   SizedBox(height: medium),
                   Container(
                     height: 300, // Set a fixed height for the PieChart
