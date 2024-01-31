@@ -1,3 +1,4 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "cmake.sourceDirectory": "C:/Users/ashiq/OneDrive/Desktop/Flutter projects/expense_tracker/linux/flutter"
 }
