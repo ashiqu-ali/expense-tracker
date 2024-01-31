@@ -1,3 +1,4 @@
+import 'package:expense_tracker/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:expense_tracker/controller/db_helper.dart';
@@ -28,11 +29,11 @@ class _IncomeChartState extends State<IncomeChart> {
 
           // Group income data by category
           Map<String, double> categoryTotals = {};
-          incomeData.forEach((entry) {
+          for (var entry in incomeData) {
             String category = entry['category'];
             double amount = entry['amount'].toDouble();
             categoryTotals[category] = (categoryTotals[category] ?? 0) + amount;
-          });
+          }
 
           double totalIncome = categoryTotals.values.fold(0, (sum, amount) => sum + amount);
 
@@ -42,7 +43,7 @@ class _IncomeChartState extends State<IncomeChart> {
               return PieChartSectionData(
                 color: Colors.accents[entry.key.hashCode % Colors.accents.length],
                 value: entry.value,
-                title: '${entry.key}',
+                title: entry.key,
                 radius: 150,
               );
             }).toList(),
@@ -53,8 +54,9 @@ class _IncomeChartState extends State<IncomeChart> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Total Income: \$${totalIncome?.toStringAsFixed(2)}'),
-                  SizedBox(height: 16),
+                  SizedBox(height: small),
+                  Text('Total Income: \$${totalIncome?.toStringAsFixed(2)}', style: p1),
+                  SizedBox(height: medium),
                   Container(
                     height: 300, // Set a fixed height for the PieChart
                     child: PieChart(pieChartData),
