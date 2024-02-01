@@ -11,8 +11,8 @@ class FloatingButton extends StatelessWidget {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const AddTransaction()));
       },
-      child: const Icon(Icons.add),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+      child: const Icon(Icons.add),
     );
   }
 }

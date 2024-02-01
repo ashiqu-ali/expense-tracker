@@ -16,7 +16,7 @@ class HomeProfile extends StatelessWidget {
             children: [
               Image.asset("assets/icons/user.png"),
               SizedBox(width: xsmall),
-              Text('Welcome Ashiq', style: heading2,)
+              Text("Welcome Ashiq", style: heading2,)
             ],
           ),
           Icon(Icons.notifications_none_rounded, color: icon, size: medium)

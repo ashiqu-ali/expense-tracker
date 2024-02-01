@@ -38,7 +38,7 @@ class _IncomeChartState extends State<IncomeChart> {
           double totalIncome =
               categoryTotals.values.fold(0, (sum, amount) => sum + amount);
 
-          // Create PieChartData
+          //PieChartData
           PieChartData pieChartData = PieChartData(
             sections: categoryTotals.entries.map((entry) {
               return PieChartSectionData(
