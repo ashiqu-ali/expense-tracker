@@ -1,11 +1,13 @@
-import 'package:expense_tracker/pages/demoPage.dart';
-import 'package:expense_tracker/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:expense_tracker/pages/main_page.dart';  // Importing MainPage
+import 'package:expense_tracker/services/reminderService.dart';
 
-main() async{
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('money');
+
   runApp(const MyApp());
 }
 
@@ -14,6 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LocalNotificationService.initialize(context);
+    LocalNotificationService.scheduleDailyNotification();
+
     return MaterialApp(
       title: 'Expense Tracker',
       debugShowCheckedModeBanner: false,
