@@ -2,9 +2,7 @@ import 'package:expense_tracker/componets/totalExpense.dart';
 import 'package:expense_tracker/componets/totalIncome.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/utils/style.dart';
-import 'package:expense_tracker/pages/main_page.dart';
 
-import '../controller/db_helper.dart';
 
 class TotalBalance extends StatelessWidget {
 

@@ -4,7 +4,7 @@ import 'package:expense_tracker/utils/style.dart';
 import 'package:flutter/material.dart';
 
 class SummaryChart extends StatefulWidget {
-  const SummaryChart({Key? key}) : super(key: key);
+  const SummaryChart({super.key});
 
   @override
   State<SummaryChart> createState() => _SummaryChartState();
@@ -81,8 +81,8 @@ class _SummaryChartState extends State<SummaryChart> {
           Expanded(
             child: Stack(
               children: [
-                if (type == 'Income') IncomeChart(),
-                if (type == 'Expense') ExpenseChart(),
+                if (type == 'Income') const IncomeChart(),
+                if (type == 'Expense') const ExpenseChart(),
               ],
             ),
           ),

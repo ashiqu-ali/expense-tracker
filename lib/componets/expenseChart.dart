@@ -4,7 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:expense_tracker/controller/db_helper.dart';
 
 class ExpenseChart extends StatefulWidget {
-  const ExpenseChart({Key? key}) : super(key: key);
+  const ExpenseChart({super.key});
 
   @override
   State<ExpenseChart> createState() => _ExpenseChartState();
@@ -59,7 +59,7 @@ class _ExpenseChartState extends State<ExpenseChart> {
                 children: [
                   SizedBox(height: small),
 
-                  Text('Total Expense: \$${totalExpense?.toStringAsFixed(2)}', style: p1),
+                  Text('Total Expense: \$${totalExpense.toStringAsFixed(2)}', style: p1),
                   SizedBox(height: medium),
                   SizedBox(
                     height: 300,

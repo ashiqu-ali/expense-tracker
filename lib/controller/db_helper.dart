@@ -57,8 +57,4 @@ class DbHelper {
   Future<void> deleteData(int key)async {
     await box.delete(key);
   }
-
-  Future<void> deleteAllData() async {
-    await box.clear();
-  }
 }

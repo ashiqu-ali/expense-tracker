@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:expense_tracker/pages/main_page.dart';  // Importing MainPage
+import 'package:expense_tracker/pages/main_page.dart';
 import 'package:expense_tracker/services/reminderService.dart';
 
 void main() async {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/pages/addTransaction.dart';
 
 class FloatingButton extends StatelessWidget {
-  const FloatingButton({Key? key}) : super(key: key);
+  const FloatingButton({super.key});
 
   @override
   Widget build(BuildContext context) {

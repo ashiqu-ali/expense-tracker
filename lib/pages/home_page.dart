@@ -7,7 +7,7 @@ import '../componets/total_card.dart';
 import '../controller/db_helper.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     totalBalance = 0;
     totalIncome = 0;
     totalExpense = 0;
-    entireData.forEach((value) {
+    for (var value in entireData) {
       if (value['type'] == 'Income') {
         totalBalance += (value['amount'] as int);
         totalIncome += (value['amount'] as int);
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         totalBalance -= (value['amount'] as int);
         totalExpense += (value['amount'] as int);
       }
-    });
+    }
   }
 
   DateTime? currentBackPressTime;

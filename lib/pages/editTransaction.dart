@@ -8,7 +8,7 @@ class EditTransaction extends StatefulWidget {
   final Map<String, dynamic> editData;
   final int index;
 
-  const EditTransaction({Key? key, required this.editData, required this.index}) : super(key: key);
+  const EditTransaction({super.key, required this.editData, required this.index});
 
   @override
   State<EditTransaction> createState() => _EditTransactionState();
@@ -59,7 +59,6 @@ class _EditTransactionState extends State<EditTransaction> {
     note = widget.editData['note'];
     category = widget.editData['category'];
     date = widget.editData['date'];
-    print(widget.editData);
   }
 
   @override
@@ -170,7 +169,6 @@ class _EditTransactionState extends State<EditTransaction> {
                     // If val is null or empty, set amount to null
                     amount = int.parse(val);
                   } catch (e) {
-                    print(e);
                   }
                 },
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -227,13 +225,10 @@ class _EditTransactionState extends State<EditTransaction> {
                 children: [
                   IconButton(
                       onPressed: () async {
-                        print(widget.index);
                         try{
                           await dbHelper.deleteData(widget.index);
-                          print("Delete Succesfully");
                           Navigator.push(context, MaterialPageRoute(builder: (context) => const MainPage()));
                         } catch(e) {
-                          print(e);
                         }
                       },
                       icon: const Icon(Icons.delete_outline_rounded)
@@ -241,11 +236,6 @@ class _EditTransactionState extends State<EditTransaction> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () async {
-                        print(amount);
-                        print(type);
-                        print(category);
-                        print(date);
-                        print(note);
                         try{
                             await dbHelper.updateData(
                                     widget.index,
@@ -259,9 +249,7 @@ class _EditTransactionState extends State<EditTransaction> {
                             context,
                             MaterialPageRoute(builder: (context) => const MainPage()),
                             );
-                              print('value updated');
                         }catch(e){
-                          print(e);
                         }
                         },
                       child: const Text('Update'),

@@ -4,7 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:expense_tracker/controller/db_helper.dart';
 
 class IncomeChart extends StatefulWidget {
-  const IncomeChart({Key? key}) : super(key: key);
+  const IncomeChart({super.key});
 
   @override
   State<IncomeChart> createState() => _IncomeChartState();
@@ -60,7 +60,7 @@ class _IncomeChartState extends State<IncomeChart> {
                   Text('Total Income: \$${totalIncome?.toStringAsFixed(2)}',
                       style: p1),
                   SizedBox(height: medium),
-                  Container(
+                  SizedBox(
                     height: 300, // Set a fixed height for the PieChart
                     child: PieChart(pieChartData),
                   ),
@@ -69,7 +69,7 @@ class _IncomeChartState extends State<IncomeChart> {
             ),
           );
         } else {
-          return Center(child: Text("No income data available."));
+          return const Center(child: Text("No income data available."));
         }
       },
     );

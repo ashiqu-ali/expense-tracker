@@ -8,8 +8,8 @@ class RecentTransaction extends StatelessWidget {
 
   const RecentTransaction({
     required this.data,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:expense_tracker/pages/main_page.dart';
 import 'package:expense_tracker/utils/style.dart';
 
 class AddTransaction extends StatefulWidget {
-  const AddTransaction({Key? key}) : super(key: key);
+  const AddTransaction({super.key});
 
   @override
   State<AddTransaction> createState() => _AddTransactionState();
@@ -224,9 +224,7 @@ class _AddTransactionState extends State<AddTransaction> {
                         amount!, date, category!, note, type!);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => const MainPage()));
-                    print('value added');
                   } else {
-                    print('value not provided');
                   }
                 },
                 child: const Text('Add'),
