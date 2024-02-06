@@ -6,26 +6,24 @@ import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   static void initialize(BuildContext context) {
     tz.initializeTimeZones(); // Initialize timezone
     const InitializationSettings initializationSettingsAndroid =
-    InitializationSettings(
-        android: AndroidInitializationSettings("@drawable/ic_launcher"));
+        InitializationSettings(
+            android: AndroidInitializationSettings("@drawable/ic_launcher"));
     _notificationsPlugin.initialize(
       initializationSettingsAndroid,
       onDidReceiveNotificationResponse: (details) async {
-        if (details.input != null) {
+        if (details.input != null && details.payload == 'add_transaction') {
           // Handle notification interaction if needed
           // If the "Add Transaction" button is pressed, navigate to AddTransaction page
-          if (details.payload == 'add_transaction') {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AddTransaction(),
-              ),
-            );
-          }
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const AddTransaction(),
+            ),
+          );
         }
       },
     );
@@ -55,15 +53,21 @@ class LocalNotificationService {
       ),
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
-      UILocalNotificationDateInterpretation.absoluteTime,
+          UILocalNotificationDateInterpretation.absoluteTime,
       payload: 'add_transaction',
     );
   }
 
   static tz.TZDateTime _nextInstanceOf115PM() {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate =
-    tz.TZDateTime(tz.local, now.year, now.month, now.day, 13, 15);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      13,
+      15,
+    );
 
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
